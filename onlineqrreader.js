@@ -9,7 +9,6 @@ if (Meteor.isClient) {
 
   Template.upload.events({
     'click input' : function () {
-      // template data, if any, is available in 'this'
       if (typeof console !== 'undefined')
         console.log("You pressed the upload button");
         var key = "AVBBdW4z9R3ybh8LG1XPcz";
@@ -28,7 +27,6 @@ if (Meteor.isClient) {
 
   Template.take_picture.events({
     'click input' : function () {
-      // template data, if any, is available in 'this'
       if (typeof console !== 'undefined')
         console.log("You pressed the take picture button");
     }
@@ -37,14 +35,11 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
-    // code to run on server at startup
   });
+
   Meteor.methods({
   sendEmail: function (to, from, subject, text) {
     check([to, from, subject, text], [String]);
-
-    // Let other method calls from the same client start running,
-    // without waiting for the email sending to complete.
     this.unblock();
 
     Email.send({
@@ -53,6 +48,7 @@ if (Meteor.isServer) {
       subject: subject,
       text: text
     });
+    console.log("Email sent to " + to);
   }
 });
 }
