@@ -25,7 +25,7 @@ if (Meteor.isClient) {
           picURL = Pic.url;
           //picURL = "https://www.filepicker.io/api/file/LxqFMcvTSCanIn1gIZZx"; //TEST - force file
           console.log("picURL from upload is: " + picURL); //TEST
-          //analytics.track('Upload pic');
+          analytics.track('Upload pic');
           Session.set("currentPage", "a_file");
         });
     }
@@ -40,7 +40,7 @@ if (Meteor.isClient) {
           picURL = Pic.url;
           //picURL = "https://www.filepicker.io/api/file/LxqFMcvTSCanIn1gIZZx"; //TEST - force file
           console.log("picURL from take pic is: " + picURL); //TEST
-          //analytics.track('Take pic');
+          analytics.track('Take pic');
           Session.set("currentPage", "a_file");
         });
       }
@@ -58,7 +58,7 @@ if (Meteor.isClient) {
         console.log("You pressed the submit button"); //TEST
         console.log("Submit: " + picURL); //TEST
         console.log("Email: " + emailAddress); //TEST
-        //analytics.track('Submitted QR');
+        analytics.track('Submitted QR');
         Session.set("currentPage", "sent_file");
     }
   });
