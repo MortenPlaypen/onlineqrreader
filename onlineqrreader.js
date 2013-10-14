@@ -20,14 +20,14 @@ if (Meteor.isClient) {
     'click input' : function () {
       if (typeof console !== 'undefined')
         console.log("You pressed the upload button"); //TEST
-        //filepicker.setKey("key");
-        //filepicker.pick(function(Pic){
-          //picURL = Pic.url;
-          picURL = "https://www.filepicker.io/api/file/LxqFMcvTSCanIn1gIZZx"; //TEST - force file
+        filepicker.setKey("key");
+        filepicker.pick({services: ['COMPUTER','DROPBOX','GMAIL']},function(Pic){
+          picURL = Pic.url;
+          //picURL = "https://www.filepicker.io/api/file/LxqFMcvTSCanIn1gIZZx"; //TEST - force file
           console.log("picURL from upload is: " + picURL); //TEST
           //analytics.track('Upload pic');
           Session.set("currentPage", "a_file");
-        //});
+        });
     }
   });
 
@@ -35,14 +35,14 @@ if (Meteor.isClient) {
     'click input' : function () {
       if (typeof console !== 'undefined')
         console.log("You pressed the take picture button"); //TEST
-        //filepicker.setKey("key");
-        //filepicker.pick(function(Pic){
-          //picURL = Pic.url;
-          picURL = "https://www.filepicker.io/api/file/LxqFMcvTSCanIn1gIZZx"; //TEST - force file
+        filepicker.setKey("key");
+        filepicker.pick({services: ['WEBCAM']},function(Pic){
+          picURL = Pic.url;
+          //picURL = "https://www.filepicker.io/api/file/LxqFMcvTSCanIn1gIZZx"; //TEST - force file
           console.log("picURL from take pic is: " + picURL); //TEST
           //analytics.track('Take pic');
           Session.set("currentPage", "a_file");
-        //});
+        });
       }
   });
 
