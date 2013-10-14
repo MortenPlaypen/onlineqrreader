@@ -1,6 +1,8 @@
 {
   "packages": {
     "mixpanel": {},
-    "analyticsjs": {}
+    "analyticsjs": {},
+    "loadpicker": {},
+    "filepicker": {}
   }
 }

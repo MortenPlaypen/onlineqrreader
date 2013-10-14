@@ -3,18 +3,28 @@
 </head>
 
 <body>
+  <header>
+  </header>
   {{> upload}}
   {{> take_picture}}
+  {{> submit_qr}}
 </body>
 
 <template name="upload">
   <h1>Upload your QR code!</h1>
-  {{greeting}}
-  <input type="button" value="Upload" />
+  Upload your QR code as an image
+  <input id="btnuploadimage" type="button" value="Upload" />
 </template>
 
 <template name="take_picture">
   <h1>Snap a picture!</h1>
-  {{greeting}}
-  <input type="button" value="Take picture" />
+  Take a picture of a QR code
+  <input id="btntakeimage" type="button" value="Take picture" />
+</template>
+
+<template name="submit_qr">
+  <h1>Send the QR code!</h1>
+  Email address: <input type="text" name="address" />
+  <input id="btnsendcode" type="button" value="Send" />
+
 </template>
