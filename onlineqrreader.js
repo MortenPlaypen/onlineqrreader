@@ -46,6 +46,9 @@ if (Meteor.isClient) {
       }
   });
 
+  Template.show_image.getImage = function(){
+    return picURL;
+  };
 
   Template.submit_qr.events({
     'click #btnsendcode' : function () {

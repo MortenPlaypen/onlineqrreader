@@ -15,6 +15,7 @@
   {{/if}}
 
   {{#if currentPage "a_file"}}
+    {{> show_image}}
     {{> submit_qr}}
   {{/if}}
 
@@ -45,4 +46,8 @@
 
 <template name="confirmation">
     <h1>Thank you!</h1>
+</template>
+
+<template name="show_image">
+    <img src="{{getImage}}">
 </template>
