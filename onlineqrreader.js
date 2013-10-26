@@ -17,7 +17,7 @@ if (Meteor.isClient) {
   });
 
   Template.upload.events({
-    'click input' : function () {
+    'click button' : function () {
       if (typeof console !== 'undefined')
         console.log("You pressed the upload button"); //TEST
         filepicker.setKey("key");
@@ -32,7 +32,7 @@ if (Meteor.isClient) {
   });
 
   Template.take_picture.events({
-    'click input' : function () {
+    'click button' : function () {
       if (typeof console !== 'undefined')
         console.log("You pressed the take picture button"); //TEST
         filepicker.setKey("key");

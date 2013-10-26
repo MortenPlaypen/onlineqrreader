@@ -5,13 +5,28 @@
 <body>
   <header>
   </header>
-    {{> content}}
+  <div class=container>
+    <div class="masthead">
+      <ul class="nav nav-pills pull-right">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <h3 class="muted">OnlineQRreader.com</h3>
+    </div>
+
+    <hr>
+    
+    <div class="hero-unit">
+      {{> content}}
+    </div>
+  </div>
 </body>
 
 <template name="content">
   {{#if currentPage "no_file"}}
-    {{> upload}}
-    {{> take_picture}}
+      {{> upload}}
+      {{> take_picture}}
   {{/if}}
 
   {{#if currentPage "a_file"}}
@@ -28,14 +43,14 @@
 
 <template name="upload">
     <h1>Upload your QR code!</h1>
-    Upload your QR code as an image
-    <input id="btnuploadimage" type="button" value="Upload" />
+    <p>Upload your QR code as an image</p>
+    <button id="btnuploadimage" class="btn btn-success btn-large"><i class="icon-white icon-circle-arrow-up"></i> Upload an image file of a QR code</button>
 </template>
 
 <template name="take_picture">
     <h1>Snap a picture!</h1>
-    Take a picture of a QR code
-    <input id="btntakeimage" type="button" value="Take picture" />
+    <p>Take a picture of a QR code</p>
+    <button id="btntakepicture" class="btn btn-success btn-large"><i class="icon-white icon-camera"></i> Take a picture of a QR code</button>
 </template>
 
 <template name="submit_qr">
