@@ -14,6 +14,7 @@ if (Meteor.isClient) {
     analytics.load("xdhpak9s5e");
     key = "AVBBdW4z9R3ybh8LG1XPcz"; // Filepicker token
     Session.set("currentPage", "no_file");
+    Session.set("happy", "notset");
   });
 
   Template.upload.events({
@@ -63,6 +64,30 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.content_result.events({
+    'click #btnhappy' : function () {
+      if (typeof console !== 'undefined')
+        Session.set("happy", "yes");
+        console.log("Happy!");
+    },
+    'click #btnnothappy' : function () {
+      if (typeof console !== 'undefined')
+        Session.set("happy", "no");
+        console.log("Not happy!");
+    }
+  });
+
+  Template.content_result.events({
+    'click #btnfeedback' : function () {
+      if (typeof console !== 'undefined')
+        feedback = $("input[type=field]").val();
+        Meteor.call('sendFeedback', feedback);
+        console.log("Feedback!");
+        console.log(feedback);
+        Session.set("happy", "sent");
+    }
+  });
+
   Template.content_upload.helpers({
   currentPage: function (type) {
     var thePage = Session.get("currentPage");
@@ -76,6 +101,14 @@ if (Meteor.isClient) {
     return thePage === type;
   }
   });
+
+  Template.content_result.helpers({
+  happy: function (type) {
+    var theState = Session.get("happy");
+    return theState === type;
+  }
+  });
+
 }
 
 if (Meteor.isServer) {
@@ -95,6 +128,19 @@ if (Meteor.isServer) {
       });
       console.log("Email sent");
     },
+
+    sendFeedback: function (feedback) {
+      check([feedback], [String]);
+      this.unblock();
+
+      Email.send({
+        to: 'lundsby@gmail.com',
+        from: 'lundsby@gmail.com',
+        subject: 'QR Reader Feedback',
+        text: feedback,
+      })
+      console.log("Feedback sent");
+    }
   });
 }
 

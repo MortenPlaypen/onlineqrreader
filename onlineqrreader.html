@@ -158,9 +158,29 @@
         <h1>2</h1>
       </div>
     </div>
-    <div class="span10">
+    <div class="span5">
       <div class=hero-unit>
         <p>This is the result!</p>
+      </div>
+    </div>
+    <div class="span5">
+      <div class=hero-unit>
+      {{#if happy "notset"}}
+        <p>Was this what you were looking for?</p>
+        <button id="btnhappy" class="btn btn-success btn-small"><i class="icon-white icon-thumbs-up"></i> Yes</button>
+        <button id="btnnothappy" class="btn btn-danger btn-small"><i class="icon-white icon-thumbs-down"></i> No</button>
+      {{/if}}
+      {{#if happy "yes"}}
+        <p>You make me so happy!</p>
+      {{/if}}
+      {{#if happy "no"}}
+        <p>That is noted! Would you like to tell us a little more about what we could do better?</p>
+        <input id="textinput" name="textinput" type="field" placeholder="placeholder" class="input-block-level">
+        <input id="btnfeedback" type="submit" class="btn btn-success btn-small" value="Submit"/>
+      {{/if}}
+      {{#if happy "sent"}}
+        <p>Thank you so much for helping us improve OnlineQRreader.com!</p>
+      {{/if}}
       </div>
     </div>
   </div>
