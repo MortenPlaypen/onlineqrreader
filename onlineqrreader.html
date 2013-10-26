@@ -5,64 +5,164 @@
 <body>
   <header>
   </header>
+  {{> header}}
+    <hr>
+  {{> content}}
+</body>
+
+
+
+<template name="header">
+  </header>
   <div class=container>
     <div class="masthead">
       <ul class="nav nav-pills pull-right">
-        <li class="active"><a href="#">Home</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
       <h3 class="muted">OnlineQRreader.com</h3>
     </div>
-
-    <hr>
-    
-    <div class="hero-unit">
-      {{> content}}
-    </div>
   </div>
-</body>
+</template>
 
 <template name="content">
+  <div class=container>
+    <div class=hero-unit>
+      <h1>Where the magic happens!</h1>
+      <p>Do you have a QR code you want translated fast, without bothering with downloading apps and installing on your phone - then you've come to the right place!</p>
+    </div>
+      {{> content_upload}}
+      {{> content_result}}
+  </div>
+</template>
+
+<template name="content_upload">
   {{#if currentPage "no_file"}}
-      {{> upload}}
-      {{> take_picture}}
+  <div class="row">
+    <div class="span2">
+      <div class=hero-unit>
+        <h1>1</h1>
+      </div>
+    </div>
+    <div class="span5">
+      <div class=hero-unit>
+        {{> upload}}
+      </div>
+    </div>
+    <div class="span5">
+      <div class=hero-unit>
+        {{> take_picture}}
+      </div>
+    </div>
+  </div>
   {{/if}}
 
   {{#if currentPage "a_file"}}
-    {{> show_image}}
-    {{> submit_qr}}
+  <div class="row">
+    <div class="span2">
+      <div class=hero-unit>
+        <h1>1</h1>
+      </div>
+    </div>
+    <div class="span5">
+      <div class=hero-unit>
+        {{> submit_qr}}
+      </div>
+    </div>
+    <div class="span5">
+      <div class=hero-unit>
+        {{> show_image}}
+      </div>
+    </div>
+  </div>
   {{/if}}
 
   {{#if currentPage "sent_file"}}
-    {{> confirmation}}
-    {{> upload}}
-    {{> take_picture}}
+  <div class="row">
+    <div class="span2">
+      <div class=hero-unit>
+        <h1>1</h1>
+      </div>
+    </div>
+    <div class="span5">
+      <div class=hero-unit>
+        {{> upload}}
+      </div>
+    </div>
+    <div class="span5">
+      <div class=hero-unit>
+        {{> take_picture}}
+      </div>
+    </div>
+  </div>
   {{/if}}
 </template>
 
 <template name="upload">
-    <h1>Upload your QR code!</h1>
-    <p>Upload your QR code as an image</p>
-    <button id="btnuploadimage" class="btn btn-success btn-large"><i class="icon-white icon-circle-arrow-up"></i> Upload an image file of a QR code</button>
+  <h2>Upload</h2>
+  <p>Did you receive a QR code as an email attachment or image file?</p>
+  <button id="btnuploadimage" class="btn btn-success btn-large"><i class="icon-white icon-circle-arrow-up"></i> Upload an image file of a QR code</button>
 </template>
 
 <template name="take_picture">
-    <h1>Snap a picture!</h1>
-    <p>Take a picture of a QR code</p>
-    <button id="btntakepicture" class="btn btn-success btn-large"><i class="icon-white icon-camera"></i> Take a picture of a QR code</button>
+  <h2>Take picture</h2>
+  <p>Do you have a QR code on a piece of paper, tattoed on your arm or similar?</p>
+  <button id="btntakepicture" class="btn btn-success btn-large"><i class="icon-white icon-camera"></i> Take a picture of a QR code</button>
 </template>
 
 <template name="submit_qr">
-    <h1>Send the QR code!</h1>
-    Email address: <input type="text" name="address" />
-    <input id="btnsendcode" type="button" value="Send" />
-</template>
-
-<template name="confirmation">
-    <h1>Thank you!</h1>
+    <h2>Send the QR code!</h2>
+    <p>Email address: <input type="text" name="address" /></p>
+    <button id="btnsendcode" class="btn btn-success btn-large"><i class="icon-white icon-envelope"></i> Submit</button>
 </template>
 
 <template name="show_image">
     <img src="{{getImage}}">
+</template>
+
+<template name="content_result">
+  {{#if currentPage "no_file"}}
+  <div class="row">
+    <div class="span2">
+      <div class=hero-unit>
+        <h1>2</h1>
+      </div>
+    </div>
+    <div class="span10">
+      <div class=hero-unit>
+        <p>Get the message and be on your merry way</p>
+      </div>
+    </div>
+  </div>
+  {{/if}}
+
+  {{#if currentPage "a_file"}}
+  <div class="row">
+    <div class="span2">
+      <div class=hero-unit>
+        <h1>2</h1>
+      </div>
+    </div>
+    <div class="span10">
+      <div class=hero-unit>
+        <p>Get the message and be on your merry way</p>
+      </div>
+    </div>
+  </div>
+  {{/if}}
+
+  {{#if currentPage "sent_file"}}
+  <div class="row">
+    <div class="span2">
+      <div class=hero-unit>
+        <h1>2</h1>
+      </div>
+    </div>
+    <div class="span10">
+      <div class=hero-unit>
+        <p>This is the result!</p>
+      </div>
+    </div>
+  </div>
+  {{/if}}
 </template>

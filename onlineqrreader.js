@@ -63,13 +63,19 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.content.helpers({
+  Template.content_upload.helpers({
   currentPage: function (type) {
     var thePage = Session.get("currentPage");
     return thePage === type;
   }
   });
 
+  Template.content_result.helpers({
+  currentPage: function (type) {
+    var thePage = Session.get("currentPage");
+    return thePage === type;
+  }
+  });
 }
 
 if (Meteor.isServer) {
