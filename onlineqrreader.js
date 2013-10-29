@@ -5,6 +5,7 @@
 //};
 
 var picURL;
+var qrResult;
 var emailAddress;
 
 if (Meteor.isClient) {
@@ -74,10 +75,8 @@ if (Meteor.isClient) {
       if (typeof console !== 'undefined')
         Session.set("happy", "no");
         console.log("Not happy!");
-    }
-  });
+    },
 
-  Template.content_result.events({
     'click #btnfeedback' : function () {
       if (typeof console !== 'undefined')
         feedback = $("input[type=field]").val();
@@ -85,6 +84,28 @@ if (Meteor.isClient) {
         console.log("Feedback!");
         console.log(feedback);
         Session.set("happy", "sent");
+    },
+
+    'click #btntestQRURL' : function () {
+      if (typeof console !== 'undefined')
+        console.log("QR test!");
+        //qrcode.callback = function(data) { alert(data); };
+        qrcode.callback = function(data) {
+          console.log(data);
+          qrResult = data;
+          console.log(qrResult);
+        };
+        //qrcode.decode("/qr_code_file.jpg");
+        qrcode.decode("http://www.sparkplugdigital.com/wp-content/uploads/2011/04/qr_code.jpg");
+        //Meteor.call('translateQR', "http://www.sparkplugdigital.com/wp-content/uploads/2011/04/qr_code.jpg",  "lundsby@gmail.com");
+    },
+
+    'click #btntestQRpicURL' : function () {
+      if (typeof console !== 'undefined')
+        console.log("QR test!");
+        qrcode.callback = function(data) { alert(data); };
+        qrcode.decode(picURL);
+        //Meteor.call('translateQR', picURL, "lundsby@gmail.com");
     }
   });
 
