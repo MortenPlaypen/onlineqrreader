@@ -52,16 +52,29 @@ if (Meteor.isClient) {
     return picURL;
   };
 
+  Template.content_result.getResult = function(){
+    return qrResult;
+  };
+
   Template.submit_qr.events({
     'click #btnsendcode' : function () {
       if (typeof console !== 'undefined')
         emailAddress = $("input[type=text]").val();
-        Meteor.call('translateQR', picURL, emailAddress); //calls translate function
+        //Meteor.call('translateQR', picURL, emailAddress); //calls translate function
         console.log("You pressed the submit button"); //TEST
-        console.log("Submit: " + picURL); //TEST
-        console.log("Email: " + emailAddress); //TEST
-        analytics.track('Submitted QR');
-        Session.set("currentPage", "sent_file");
+        //console.log("Submit: " + picURL); //TEST
+        //console.log("Email: " + emailAddress); //TEST
+        //analytics.track('Submitted QR');
+        qrcode.callback = function(data) {
+          //console.log(data);
+          qrResult = data;
+          console.log(qrResult);
+          Session.set("currentPage", "sent_file");
+        };
+        //qrcode.decode("/qr_code_file.jpg");
+        qrcode.decode(picURL);
+        //qrcode.decode("http://www.sparkplugdigital.com/wp-content/uploads/2011/04/qr_code.jpg");
+        //Session.set("currentPage", "sent_file");
     }
   });
 
@@ -120,10 +133,8 @@ if (Meteor.isClient) {
   currentPage: function (type) {
     var thePage = Session.get("currentPage");
     return thePage === type;
-  }
-  });
+  },
 
-  Template.content_result.helpers({
   happy: function (type) {
     var theState = Session.get("happy");
     return theState === type;
