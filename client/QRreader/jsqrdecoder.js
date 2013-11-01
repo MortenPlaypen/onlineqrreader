@@ -2507,8 +2507,10 @@ qrcode.decode = function(src){
 				console.log(e);
                 qrcode.result = "error decoding QR Code";
             }
-			if(qrcode.callback!=null)
+			if(qrcode.callback!=null){
+				console.log("Result: " + qrcode.result);
 				qrcode.callback(qrcode.result);
+			}
 		}
 		image.src = src;
 	}

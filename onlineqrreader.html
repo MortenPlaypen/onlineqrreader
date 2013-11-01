@@ -72,6 +72,9 @@
   <h2>Upload</h2>
   <p>Did you receive a QR code as an email attachment or image file?</p>
   <button id="btnuploadimage" class="btn btn-success btn-large"><i class="icon-white icon-circle-arrow-up"></i> Upload an image file of a QR code</button>
+  
+  <input id="image-file" type="file" />
+
 </template>
 
 <template name="take_picture">
@@ -93,19 +96,27 @@
     </div>
 
     {{#if currentPage "no_file"}}
-      <div class="span10"> 
+      <div class="span10">
         <div class=hero-unit>
           <p>Get the content and get on with things!</p>
         </div>
       </div>
     {{/if}}
+
     {{#if currentPage "a_file"}}
       <div class="span5">
         <div class=hero-unit>
           <p>This is the result!</p>
           {{getResult}}
+          <!--
+          {{getImage}}
+          <br><br><br>Your image in canvas: <img src="{{getImage}}" height="100" width="200"/>
+          <br><br><br>Your image in canvas: <img src="'+img.src+'" height="200" width="200"/>
+          <img src="{{getImage}}">
+        -->
         </div>
       </div>
+
       <div>
         <div class="span5">
           <div class=hero-unit>

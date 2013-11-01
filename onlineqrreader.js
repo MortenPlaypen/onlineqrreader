@@ -7,6 +7,7 @@
 var picURL;
 var qrResult;
 var emailAddress;
+var img;
 
 if (Meteor.isClient) {
 
@@ -18,14 +19,15 @@ if (Meteor.isClient) {
     Session.set("happy", "notset");
   });
 
+/*
   Template.upload.events({
     'click button' : function () {
       if (typeof console !== 'undefined')
-        filepicker.setKey("key");
-        filepicker.pick({services: ['COMPUTER','DROPBOX','GMAIL']},function(Pic){
-          picURL = Pic.url;
+        //filepicker.setKey("key");
+        //filepicker.pick({services: ['COMPUTER','DROPBOX','GMAIL']},function(Pic){
+          //picURL = Pic.url;
           //analytics.track('Upload pic');
-        });
+        //});
         qrcode.callback = function(data) {
           qrResult = data;
           Session.set("currentPage", "a_file");
@@ -34,16 +36,39 @@ if (Meteor.isClient) {
         qrcode.decode(picURL);
       }
     });
+*/
 
+  Template.upload.events({
+    'click button' : function () {
+      if (typeof console !== 'undefined')
+        img = new Image();
+        //img = document.getElementById("image-file").value;
+        imgName = document.getElementById("image-file").files[0].name;
+        img.src = imgName;
+        img.name = "TempImage";
+        console.log("Here " + img.width);
+        //document.write('<br><br><br>Your image in canvas: <img src="'+img.src+'" height="200" width="200"/>');
+        qrcode.decode(img.src);
+        qrcode.callback = function(data) {
+          qrResult = data;
+          Session.set("currentPage", "a_file");
+        
+        Session.set("currentPage", "a_file");
+        };
+      }
+    });
+
+
+/*
   Template.take_picture.events({
     'click button' : function () {
       if (typeof console !== 'undefined')
         console.log("You pressed the take picture button"); //TEST
-        filepicker.setKey("key");
-        filepicker.pick({services: ['WEBCAM']},function(Pic){
-          picURL = Pic.url;
+        //filepicker.setKey("key");
+        //filepicker.pick({services: ['WEBCAM']},function(Pic){
+          //picURL = Pic.url;
           //analytics.track('Take pic');
-        });
+        //});
         qrcode.callback = function(data) {
           qrResult = data;
           Session.set("currentPage", "a_file");
@@ -52,10 +77,16 @@ if (Meteor.isClient) {
         qrcode.decode(picURL);
       }
     });
+*/
 
   Template.content_result.getResult = function(){
     return qrResult;
   };
+
+  Template.content_result.getImage = function(){
+    //document.write('<br><br><br>Your image in canvas: <img src="'+img.src+'" height="100" width="200"/>');
+    return img;
+  }
 
   Template.content_result.events({
     'click #btnhappy' : function () {
