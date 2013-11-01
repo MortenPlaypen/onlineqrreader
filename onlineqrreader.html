@@ -10,8 +10,6 @@
   {{> content}}
 </body>
 
-
-
 <template name="header">
   </header>
   <div class=container>
@@ -27,10 +25,6 @@
 
 <template name="content">
   <div class=container>
-    <div class=hero-unit>
-      <h1>Where the magic happens!</h1>
-      <p>Do you have a QR code you want translated fast, without bothering with downloading apps and installing on your phone - then you've come to the right place!</p>
-    </div>
       {{> content_upload}}
       {{> content_result}}
   </div>
@@ -38,64 +32,40 @@
 
 <template name="content_upload">
   {{#if currentPage "no_file"}}
-  <div class="row">
-    <div class="span2">
-      <div class=hero-unit>
-        <h1>1</h1>
+    <div class="row">
+      <div class="span2">
+        <div class=hero-unit>
+          <h1>1</h1>
+        </div>
+      </div>
+      <div class="span5">
+        <div class=hero-unit>
+          {{> upload}}
+        </div>
+      </div>
+      <div class="span5">
+        <div class=hero-unit>
+          {{> take_picture}}
+        </div>
       </div>
     </div>
-    <div class="span5">
-      <div class=hero-unit>
-        {{> upload}}
-      </div>
-    </div>
-    <div class="span5">
-      <div class=hero-unit>
-        {{> take_picture}}
-      </div>
-    </div>
-  </div>
   {{/if}}
 
   {{#if currentPage "a_file"}}
-  <div class="row">
-    <div class="span2">
-      <div class=hero-unit>
-        <h1>1</h1>
+    <div class="row">
+      <div class="span2">
+        <div class=hero-unit>
+          <h1>1</h1>
+        </div>
+      </div>
+      <div class="span10">
+        <div class=hero-unit>
+          {{> submit_qr}}
+        </div>
       </div>
     </div>
-    <div class="span5">
-      <div class=hero-unit>
-        {{> submit_qr}}
-      </div>
-    </div>
-    <div class="span5">
-      <div class=hero-unit>
-        {{> show_image}}
-      </div>
-    </div>
-  </div>
   {{/if}}
 
-  {{#if currentPage "sent_file"}}
-  <div class="row">
-    <div class="span2">
-      <div class=hero-unit>
-        <h1>1</h1>
-      </div>
-    </div>
-    <div class="span5">
-      <div class=hero-unit>
-        {{> upload}}
-      </div>
-    </div>
-    <div class="span5">
-      <div class=hero-unit>
-        {{> take_picture}}
-      </div>
-    </div>
-  </div>
-  {{/if}}
 </template>
 
 <template name="upload">
@@ -111,87 +81,59 @@
 </template>
 
 <template name="submit_qr">
-    <h2>Send the QR code!</h2>
-    
-    <!--
-    <p>Email address: <input type="text" name="address" /></p>
-    -->
-    <button id="btnsendcode" class="btn btn-success btn-large"><i class="icon-white icon-envelope"></i> Submit</button>
+  <h2>Thank you!</h2>
 </template>
 
 <template name="show_image">
     <img src="{{getImage}}">
 </template>
 
+
 <template name="content_result">
-  {{#if currentPage "no_file"}}
   <div class="row">
     <div class="span2">
       <div class=hero-unit>
         <h1>2</h1>
       </div>
     </div>
-    <div class="span10">
-      <div class=hero-unit>
-        <p>Get the message and be on your merry way</p>
-        
-        <!-- TEST BUTTONS
-        <input id="btntestQRURL" type="submit" class="btn btn-success btn-small" value="URL"/>
-        <input id="btntestQRpicURL" type="submit" class="btn btn-success btn-small" value="picURL"/>
-        -->
-      </div>
-    </div>
-  </div>
-  {{/if}}
 
-  {{#if currentPage "a_file"}}
-  <div class="row">
-    <div class="span2">
-      <div class=hero-unit>
-        <h1>2</h1>
+    {{#if currentPage "no_file"}}
+      <div class="span10"> 
+        <div class=hero-unit>
+          <p>Get the message and be on your merry way</p>
+        </div>
       </div>
-    </div>
-    <div class="span10">
-      <div class=hero-unit>
-        <p>Get the message and be on your merry way</p>
+    {{/if}}
+    {{#if currentPage "a_file"}}
+      <div class="span5">
+        <div class=hero-unit>
+          <p>This is the result!</p>
+          {{getResult}}
+        </div>
       </div>
-    </div>
-  </div>
-  {{/if}}
-
-  {{#if currentPage "sent_file"}}
-  <div class="row">
-    <div class="span2">
-      <div class=hero-unit>
-        <h1>2</h1>
+      <div>
+        <div class="span5">
+          <div class=hero-unit>
+            {{#if happy "notset"}}
+              <p>Was this what you were looking for?</p>
+              <button id="btnhappy" class="btn btn-success btn-small"><i class="icon-white icon-thumbs-up"></i> Yes</button>
+              <button id="btnnothappy" class="btn btn-danger btn-small"><i class="icon-white icon-thumbs-down"></i> No</button>
+            {{/if}}
+            {{#if happy "yes"}}
+              <p>You make me so happy!</p>
+            {{/if}}
+            {{#if happy "no"}}
+              <p>That is noted! Would you like to tell us a little more about what we could do better?</p>
+              <input id="textinput" name="textinput" type="field" placeholder="placeholder" class="input-block-level">
+              <input id="btnfeedback" type="submit" class="btn btn-success btn-small" value="Submit"/>
+            {{/if}}
+            {{#if happy "sent"}}
+              <p>Thank you so much for helping us improve OnlineQRreader.com!</p>
+            {{/if}}
+          </div>  
+        </div>
       </div>
-    </div>
-    <div class="span5">
-      <div class=hero-unit>
-        <p>This is the result!</p>
-        {{getResult}}
-      </div>
-    </div>
-    <div class="span5">
-      <div class=hero-unit>
-      {{#if happy "notset"}}
-        <p>Was this what you were looking for?</p>
-        <button id="btnhappy" class="btn btn-success btn-small"><i class="icon-white icon-thumbs-up"></i> Yes</button>
-        <button id="btnnothappy" class="btn btn-danger btn-small"><i class="icon-white icon-thumbs-down"></i> No</button>
-      {{/if}}
-      {{#if happy "yes"}}
-        <p>You make me so happy!</p>
-      {{/if}}
-      {{#if happy "no"}}
-        <p>That is noted! Would you like to tell us a little more about what we could do better?</p>
-        <input id="textinput" name="textinput" type="field" placeholder="placeholder" class="input-block-level">
-        <input id="btnfeedback" type="submit" class="btn btn-success btn-small" value="Submit"/>
-      {{/if}}
-      {{#if happy "sent"}}
-        <p>Thank you so much for helping us improve OnlineQRreader.com!</p>
-      {{/if}}
-      </div>
+    {{/if}}
     </div>
   </div>
-  {{/if}}
 </template>
