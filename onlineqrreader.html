@@ -15,8 +15,8 @@
   <div class=container>
     <div class="masthead">
       <ul class="nav nav-pills pull-right">
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
+        <!--<li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>-->
       </ul>
       <h3 class="muted">OnlineQRreader.com</h3>
     </div>
@@ -75,19 +75,14 @@
 </template>
 
 <template name="take_picture">
-  <h2>Take picture</h2>
-  <p>Do you have a QR code on a piece of paper, tattoed on your arm or similar?</p>
+  <h2>Take a picture</h2>
+  <p>Do you have a QR code on a piece of paper, tattoed on your arm or on something else?</p>
   <button id="btntakepicture" class="btn btn-success btn-large"><i class="icon-white icon-camera"></i> Take a picture of a QR code</button>
 </template>
 
 <template name="submit_qr">
   <h2>Thank you!</h2>
 </template>
-
-<template name="show_image">
-    <img src="{{getImage}}">
-</template>
-
 
 <template name="content_result">
   <div class="row">
@@ -100,7 +95,7 @@
     {{#if currentPage "no_file"}}
       <div class="span10"> 
         <div class=hero-unit>
-          <p>Get the message and be on your merry way</p>
+          <p>Get the content and get on with things!</p>
         </div>
       </div>
     {{/if}}
@@ -121,14 +116,17 @@
             {{/if}}
             {{#if happy "yes"}}
               <p>You make me so happy!</p>
+              <button id="btnrestart" class="btn btn-success btn-small">Have another code?</button>
             {{/if}}
             {{#if happy "no"}}
               <p>That is noted! Would you like to tell us a little more about what we could do better?</p>
               <input id="textinput" name="textinput" type="field" placeholder="placeholder" class="input-block-level">
               <input id="btnfeedback" type="submit" class="btn btn-success btn-small" value="Submit"/>
+              <button id="btnrestart" class="btn btn-success btn-small">Have another code?</button>
             {{/if}}
             {{#if happy "sent"}}
               <p>Thank you so much for helping us improve OnlineQRreader.com!</p>
+              <button id="btnrestart" class="btn btn-success btn-small">Have another code?</button>
             {{/if}}
           </div>  
         </div>

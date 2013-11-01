@@ -95,6 +95,12 @@ if (Meteor.isClient) {
         console.log("QR test!");
         qrcode.callback = function(data) { alert(data); };
         qrcode.decode(picURL);
+    },
+
+    'click #btnrestart' : function () {
+      if (typeof console !== 'undefined')
+        Session.set("happy", "notset");
+        Session.set("currentPage", "no_file");
     }
   });
 
