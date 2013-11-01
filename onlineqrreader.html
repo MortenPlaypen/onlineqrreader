@@ -38,16 +38,17 @@
           <h1>1</h1>
         </div>
       </div>
-      <div class="span5">
+      <div class="span10"> <!-- CAMERA REMOVED, CHANGE TO 5 -->
         <div class=hero-unit>
           {{> upload}}
         </div>
       </div>
+      <!-- CAMERA REMOVED  
       <div class="span5">
         <div class=hero-unit>
-          {{> take_picture}}
+          {> take_picture} FIX BRACKETS WHEN UNCOMMENTING!
         </div>
-      </div>
+      </div> -->
     </div>
   {{/if}}
 
@@ -71,9 +72,8 @@
 <template name="upload">
   <h2>Upload</h2>
   <p>Did you receive a QR code as an email attachment or image file?</p>
-  <button id="btnuploadimage" class="btn btn-success btn-large"><i class="icon-white icon-circle-arrow-up"></i> Upload an image file of a QR code</button>
-  
   <input id="image-file" type="file" />
+  <button id="btnuploadimage" class="btn btn-success btn-large"><i class="icon-white icon-circle-arrow-up"></i> Upload an image file of a QR code</button>
 
 </template>
 
