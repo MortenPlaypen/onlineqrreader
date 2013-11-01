@@ -1,12 +1,80 @@
+var picURL;
+var qrResult;
+var emailAddress;
+var img;
+
+//START CORS CODE
+
+// Create the XHR object.
+function createCORSRequest(method, url) {
+  var xhr = new XMLHttpRequest();
+  if ("withCredentials" in xhr) {
+    // XHR for Chrome/Firefox/Opera/Safari.
+    xhr.open(method, url, true);
+    xhr.responseType = "blob";
+    xhr.send(null);
+  } else if (typeof XDomainRequest != "undefined") {
+    // XDomainRequest for IE.
+    xhr = new XDomainRequest();
+    xhr.open(method, url);
+    xhr.responseType = "blob";
+    xhr.send(null);
+  } else {
+    // CORS not supported.
+    xhr = null;
+  }
+  return xhr;
+}
+
+// Helper method to parse the title tag from the response.
+//function getTitle(text) {
+//  return text.match('<title>(.*)?</title>')[1];
+//}
+
+
+// Make the actual CORS request.
+function makeCorsRequest(urlPassed) {
+  // All HTML5 Rocks properties support CORS.
+  var url = urlPassed;
+  console.log("1" + url);
+  var xhr = createCORSRequest('GET', url);
+  console.log("2" + xhr);
+  if (!xhr) {
+    alert('CORS not supported');
+    return;
+  }
+
+  // Response handlers.
+  xhr.onload = function() {
+    //var text = xhr.responseText;
+    //var title = getTitle(text);
+
+    img = new Image();
+    responseURL = URL.createObjectURL(xhr.response);
+    console.log(responseURL);
+    img.src = responseURL;
+    img.onload = function() {
+            qrcode.decode(picURL);
+            //ctx.drawImage(img, 0, 0);
+        }
+    console.log("Img: " + img); // + text);
+  };
+
+  xhr.onerror = function() {
+    alert('Woops, there was an error making the request.');
+  };
+
+  xhr.send();
+}
+
+//END CORS CODE
+
 // In case we forget to take out console statements. IE becomes very unhappy when we forget. Let's not make IE unhappy
 //if(typeof(console) === 'undefined') {
 //    var console = {}
 //    console.log = console.error = console.info = console.debug = console.warn = console.trace = console.dir = console.dirxml = console.group = console.groupEnd = console.time = console.timeEnd = console.assert = console.profile = function() {};
 //};
 
-var picURL;
-var qrResult;
-var emailAddress;
 
 if (Meteor.isClient) {
 
@@ -21,17 +89,24 @@ if (Meteor.isClient) {
   Template.upload.events({
     'click button' : function () {
       if (typeof console !== 'undefined')
+
         filepicker.setKey("key");
         filepicker.pick({services: ['COMPUTER','DROPBOX','GMAIL']},function(Pic){
           picURL = Pic.url;
-          //analytics.track('Upload pic');
+          console.log(picURL);
+          analytics.track('Upload pic');
+          picURL = makeCorsRequest(picURL); // Attempt at CORS'ing image
+          console.log("Post CORS: " + picURL);
+          qrcode.decode(picURL); //moved here for test purposes
         });
         qrcode.callback = function(data) {
           qrResult = data;
           Session.set("currentPage", "a_file");
+          
         };
-        picURL="/qr_code_file.jpg";
-        qrcode.decode(picURL);
+        //picURL = makeCorsRequest("https://www.filepicker.io/api/file/iLboRtlJQpafbxpKjTT1");
+        //picURL="/qr_code_file.jpg";
+        //qrcode.decode(picURL);
       }
     });
 
@@ -39,11 +114,11 @@ if (Meteor.isClient) {
     'click button' : function () {
       if (typeof console !== 'undefined')
         console.log("You pressed the take picture button"); //TEST
-        filepicker.setKey("key");
-        filepicker.pick({services: ['WEBCAM']},function(Pic){
-          picURL = Pic.url;
+        //filepicker.setKey("key");
+        //filepicker.pick({services: ['WEBCAM']},function(Pic){
+          //picURL = Pic.url;
           //analytics.track('Take pic');
-        });
+        //});
         qrcode.callback = function(data) {
           qrResult = data;
           Session.set("currentPage", "a_file");
