@@ -63,17 +63,16 @@ if (Meteor.isClient) {
     'change #image-file' : function(){
           if (typeof console !== 'undefined')
         img = new Image();
-        //img = document.getElementById("image-file").value;
         imgName = document.getElementById("image-file").files[0].name;
         img.src = imgName;
         img.name = "TempImage";
-        console.log("Here " + img.width);
+        console.log("Here ");
         //analytics.track('Upload pic');
-        //document.write('<br><br><br>Your image in canvas: <img src="'+img.src+'" height="200" width="200"/>');
         qrcode.decode(img.src);
         qrcode.callback = function(data) {
           qrResult = data;
           Session.set("currentPage", "a_file");
+          //analytics.track('Returned result');
         };
     }
   });
@@ -104,11 +103,14 @@ if (Meteor.isClient) {
   };
 
   Template.content_result.getImage = function(){
-    //document.write('<br><br><br>Your image in canvas: <img src="'+img.src+'" height="100" width="200"/>');
     return img;
   }
 
   Template.content_result.events({
+    'click #resultLink' : function () {
+      console.log("Link clicked");
+    },
+
     'click #btnhappy' : function () {
       if (typeof console !== 'undefined')
         //analytics.track('Happy');

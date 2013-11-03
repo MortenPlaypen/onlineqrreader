@@ -33,11 +33,7 @@
 <template name="content_upload">
   {{#if currentPage "no_file"}}
     <div class="row">
-      <div class="span2">
-        <div class=hero-unit>
-          <h1>1</h1>
-        </div>
-      </div>
+      
       <div class="span10"> <!-- CAMERA REMOVED, CHANGE TO 5 -->
         <div class=hero-unit>
           {{> upload}}
@@ -54,11 +50,7 @@
 
   {{#if currentPage "a_file"}}
     <div class="row">
-      <div class="span2">
-        <div class=hero-unit>
-          <h1>1</h1>
-        </div>
-      </div>
+      
       <div class="span10">
         <div class=hero-unit>
           {{> submit_qr}}
@@ -70,14 +62,17 @@
 </template>
 
 <template name="upload">
-  <h2>Upload</h2>
-  <p>Did you receive a QR code as an email attachment or image file?</p>
-  <input id="image-file" type="file" />
-  
-  <!--
-  <button id="btnuploadimage" class="btn btn-success btn-large"><i class="icon-white icon-circle-arrow-up"></i> Upload an image file of a QR code</button>
--->
-
+  <h2>1. Upload</h2>
+  <div class=row>
+    <div class="span4">
+      <span class="btn btn-success btn-file btn-large">
+        Upload an image file of a QR code <input type="file" id="image-file">
+      </span>
+    </div>
+    <div class="span4">
+      <p>Did you receive a QR code as an email attachment or image file?</p>
+    </div>
+</div>
 </template>
 
 <template name="take_picture">
@@ -87,21 +82,17 @@
 </template>
 
 <template name="submit_qr">
-  <h2>Thank you!</h2>
+  <h2>1. Thank you!</h2>
 </template>
 
 <template name="content_result">
   <div class="row">
-    <div class="span2">
-      <div class=hero-unit>
-        <h1>2</h1>
-      </div>
-    </div>
+
 
     {{#if currentPage "no_file"}}
       <div class="span10">
         <div class=hero-unit>
-          <p>Get your answer and get on with things!</p>
+          <h2>2. Get your answer and get on with things!</h2>
         </div>
       </div>
     {{/if}}
@@ -109,8 +100,8 @@
     {{#if currentPage "a_file"}}
       <div class="span5">
         <div class=hero-unit>
-          <p>This is the result!</p>
-          {{getResult}}
+          <h2>2. The QR code says:</h2>
+          <a href="{{getResult}}" id="resultLink" target="_blank">{{getResult}}</a>
           <!--
           {{getImage}}
           <br><br><br>Your image in canvas: <img src="{{getImage}}" height="100" width="200"/>
