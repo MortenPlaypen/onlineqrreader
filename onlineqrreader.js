@@ -38,7 +38,10 @@ if (Meteor.isClient) {
     });
 */
 
+
   Template.upload.events({
+
+/*
     'click button' : function () {
       if (typeof console !== 'undefined')
         img = new Image();
@@ -54,8 +57,26 @@ if (Meteor.isClient) {
           qrResult = data;
           Session.set("currentPage", "a_file");
         };
-      }
-    });
+      },
+*/
+
+    'change #image-file' : function(){
+          if (typeof console !== 'undefined')
+        img = new Image();
+        //img = document.getElementById("image-file").value;
+        imgName = document.getElementById("image-file").files[0].name;
+        img.src = imgName;
+        img.name = "TempImage";
+        console.log("Here " + img.width);
+        //analytics.track('Upload pic');
+        //document.write('<br><br><br>Your image in canvas: <img src="'+img.src+'" height="200" width="200"/>');
+        qrcode.decode(img.src);
+        qrcode.callback = function(data) {
+          qrResult = data;
+          Session.set("currentPage", "a_file");
+        };
+    }
+  });
 
 
 /*
