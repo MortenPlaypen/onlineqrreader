@@ -47,7 +47,7 @@ if (Meteor.isClient) {
         img.src = imgName;
         img.name = "TempImage";
         console.log("Here " + img.width);
-        analytics.track('Upload pic');
+        //analytics.track('Upload pic');
         //document.write('<br><br><br>Your image in canvas: <img src="'+img.src+'" height="200" width="200"/>');
         qrcode.decode(img.src);
         qrcode.callback = function(data) {
@@ -90,13 +90,13 @@ if (Meteor.isClient) {
   Template.content_result.events({
     'click #btnhappy' : function () {
       if (typeof console !== 'undefined')
-        analytics.track('Happy');
+        //analytics.track('Happy');
         Session.set("happy", "yes");
         console.log("Happy!");
     },
     'click #btnnothappy' : function () {
       if (typeof console !== 'undefined')
-        analytics.track('Unhappy');
+        //analytics.track('Unhappy');
         Session.set("happy", "no");
         console.log("Not happy!");
     },
@@ -104,7 +104,7 @@ if (Meteor.isClient) {
     'click #btnfeedback' : function () {
       if (typeof console !== 'undefined')
         feedback = $("input[type=field]").val();
-        analytics.track('Sent feedback');
+        //analytics.track('Sent feedback');
         Meteor.call('sendFeedback', feedback);
         console.log("Feedback!");
         console.log(feedback);
@@ -132,7 +132,7 @@ if (Meteor.isClient) {
 
     'click #btnrestart' : function () {
       if (typeof console !== 'undefined')
-        analytics.track('Restart');
+        //analytics.track('Restart');
         Session.set("happy", "notset");
         Session.set("currentPage", "no_file");
     }
